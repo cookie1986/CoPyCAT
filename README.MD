@@ -1,0 +1,1 @@
+# CoPyCAT - A python package for measuring verbal mirroring in dyadic conversations
