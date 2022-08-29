@@ -30,7 +30,7 @@ def create_dataframe(file_path):
         print(file_path)
     else:
         raise TypeError("Incorrect file type. Please enter file with either '.txt' or '.csv' extension")    
-    # return pd.DataFrame(transcript, columns=['speech_turn','speaker','content'])
+        
     return transcript
 
 def basic_cleaning(df, excluded_terms = None):
