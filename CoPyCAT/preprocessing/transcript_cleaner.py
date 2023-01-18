@@ -1,9 +1,9 @@
 import re
 import json
-import spacy
+# import spacy
 import pandas as pd
 
-# nlp = spacy.load("en_core_web_lg")
+# nlp = spacy.load("en_core_web_sm")
 
 def create_dataframe(file_path):
     '''
@@ -16,22 +16,32 @@ def create_dataframe(file_path):
     '''
 
     if file_path.endswith('.txt'):
+        print(file_path)
         with open(file_path) as file:
             transcript = file.readlines()
             transcript = [line.split(':') for line in  transcript]
             transcript = pd.DataFrame(transcript, columns=['speaker','content'])
-            transcript['speech_turn'] = range(len(transcript))
-            
+            transcript['turn_id'] = range(len(transcript))    
+
+        return transcript
+
     elif file_path.endswith('.csv'):
-        # STEP -> SETUP AS DATAFRAME
         print(file_path)
+        transcript = pd.read_csv(file_path)   
+
+        return transcript  
+    
     elif file_path.endswith('.json'):
-        # STEP -> SETUP AS DATAFRAME
         print(file_path)
+        transcript = pd.read_json(file_path)
+
+        return transcript
+
+
     else:
         raise TypeError("Incorrect file type. Please enter file with either '.txt' or '.csv' extension")    
         
-    return transcript
+
 
 def basic_cleaning(df, excluded_terms = None):
     '''
